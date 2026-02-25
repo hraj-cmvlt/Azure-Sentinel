@@ -138,7 +138,6 @@ def refresh_access_token() -> str:
 def upload_to_sentinel(
     logs_client: LogsIngestionClient,
     logs: list[dict[str, Any]],
-    chunk_count: int,
 ):
     """
     Upload logs to Microsoft Sentinel using Azure Monitor Logs Ingestion API.
@@ -149,8 +148,9 @@ def upload_to_sentinel(
         chunk_count: Number of events being uploaded (for logging)
     """
     try:
+        events_count = len(logs)
         logging.info(
-            f"Uploading {chunk_count} events to Microsoft Sentinel via Logs Ingestion API"
+            f"Uploading {events_count} events to Microsoft Sentinel via Logs Ingestion API"
         )
         logging.info(f"Using DCR: {data_collection_rule_id}, Stream: {stream_name}")
 
@@ -159,7 +159,7 @@ def upload_to_sentinel(
         )
 
         logging.info(
-            f"Successfully uploaded {chunk_count} events to Microsoft Sentinel"
+            f"Successfully uploaded {events_count} events to Microsoft Sentinel"
         )
     except ClientAuthenticationError as e:
         logging.error(
@@ -206,7 +206,7 @@ def gen_chunks(data: list[dict[str, Any]], logs_client: LogsIngestionClient):
         ]
 
     if filtered:
-        upload_to_sentinel(logs_client, filtered, len(filtered))
+        upload_to_sentinel(logs_client, filtered)
 
 
 def upload_timestamp_blob(connection_string, container_name, blob_name, timestamp):
