@@ -6,5 +6,6 @@ azure-functions
 azure-storage-blob
 azure-identity
 azure-keyvault-secrets
+azure-monitor-ingestion
 requests
 cryptography==46.0.5 
