@@ -223,7 +223,7 @@
                         "destinations": [
                             "[variables('destName')]"
                         ],
-                        "transformKql": "source | extend TimeGenerated = iif(isnotempty(UTCTimestamp), unixtime_seconds_todatetime(tolong(UTCTimestamp)), now())",
+                        "transformKql": "source | extend TimeGenerated = iif(isnotempty(UTCTimestamp), datetime(1970-01-01) + tolong(UTCTimestamp) * 1s, now())",
                         "outputStream": "[concat('Custom-', variables('tableName'))]"
                     }
                 ]
