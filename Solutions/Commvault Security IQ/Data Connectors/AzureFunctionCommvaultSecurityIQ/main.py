@@ -202,7 +202,7 @@ def gen_chunks(data: list[dict[str, Any]], logs_client: LogsIngestionClient):
             row
             for row in data
             if row
-            and (row.get("eventCodeString") or row.get("eventCode"))
+            and (row.get("EventCode") or row.get("EventId"))
             in target_event_codes
         ]
 
