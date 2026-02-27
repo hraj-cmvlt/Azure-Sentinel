@@ -263,15 +263,15 @@ def read_blob(connection_string, container_name, blob_name):
 
 def normalize_event(event: dict[str, Any]) -> dict[str, Any]:
     return {
-        "EventId": event.get("Event Id"),
-        "OccurrenceTime": event.get("Occurrence Time"),
-        "Severity": event.get("Severity"),
-        "Computer": event.get("Computer"),
-        "Program": event.get("Program"),
-        "EventCode": event.get("Event Code"),
-        "Description": event.get("Description"),
-        "CommcellName": event.get("Commcell name"),
-        "UTCTimestamp": event.get("UTC Timestamp"),
+        "EventId": event.get("id"),
+        "OccurrenceTime": event.get("timeSource"),
+        "Severity": event.get("severity"),
+        "Computer": event.get("clientEntity", {}).get("clientName"),
+        "Program": event.get("subsystem"),
+        "EventCode": event.get("eventCodeString") or event.get("eventCode"),
+        "Description": event.get("description"),
+        "CommcellName": event.get("clientEntity", {}).get("displayName"),
+        "UTCTimestamp": event.get("timeSource"),
     }
 
 
