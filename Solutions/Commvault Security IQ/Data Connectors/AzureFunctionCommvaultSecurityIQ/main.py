@@ -201,9 +201,7 @@ def gen_chunks(data: list[dict[str, Any]], logs_client: LogsIngestionClient):
         filtered = [
             row
             for row in data
-            if row
-            and (row.get("EventCode") or row.get("EventId"))
-            in target_event_codes
+            if row and row.get("EventCode") in target_event_codes
         ]
 
     if filtered:
