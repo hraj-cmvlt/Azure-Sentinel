@@ -189,6 +189,7 @@ def gen_chunks(data: list[dict[str, Any]], logs_client: LogsIngestionClient):
         "7:333",
         "69:60",
         "35:5575",
+        "35:5636",
         "7:349",
         "17:193",
         "17:195",
